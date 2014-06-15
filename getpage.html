@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>无标题页</title>
+</head>
+<body>
+    <div id="DynamicContent_id">
+        what's this
+    </div>
+
+    <script type="text/jscript">
+   function loadFragmentInToElement(fragment_url, element_id)
+   {
+       var element = document.getElementById(element_id);
+       var xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+        xmlhttp.open("POST", fragment_url);
+       xmlhttp.onreadystatechange = function()
+       {
+            if(xmlhttp.readyState == 4 && xmlhttp.status == 200)
+        {
+              var txtconent = xmlhttp.responseText;
+              element.innerHTML = txtconent;
+        }
+       }
+              xmlhttp.send(null); 
+   }
+   loadFragmentInToElement("http://baike.baidu.com/view/25390.htm?fr=ala0_1", "DynamicContent_id" ); 
+  </script>
+<!--
+unescape();
+escape()
+-->
+</body>
+</html>
