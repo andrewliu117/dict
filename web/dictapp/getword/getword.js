@@ -37,7 +37,7 @@ exports.getAndDivide = function(req, res) {
             var pend = htmlText.indexOf('</span>', pstart);
        
             var pronounce = htmlText.substring(pstart + '<span class="phonetic">'.length, pend)
-            console.log(pronounce);
+            console.log("pronounce: " + pronounce);
             parts = divide.divide(pronounce.substring(1, pronounce.length - 1 ))
             console.log(parts);
             var dividedPronounce = parts.join("-");

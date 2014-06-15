@@ -1,5 +1,5 @@
 
-test = ["ðo", "ð", "kən,ɡrætʃu'leʃən", "sæm", "dɪ'veləpmənts", "ˈbɪznɪs"]
+test = ["ðo", "ð", "kən,ɡrætʃu'leʃən", "sæm", "dɪ'veləpmənts", "ˈbɪznɪs", "kɑr", "'dʒʊəlri"]
 // test = ["kən,ɡrætʃu'leʃən"]
 // test = ["dɪ'veləpmənts"]
 
@@ -9,7 +9,7 @@ allYB = {
 	// 短元音
 	"DYY": {"ʌ":1, "ɒ":1, "ə":1, "ɪ":1, "u":1, "e":1, "æ":1, "ɑ":1},
 	// 双元音
-	"SYY": {"eɪ":1, "aɪ":1, "ɔɪ":1, "ɪə":1, "eə":1, "ʊə":1, "əʊ":1, "aʊ":1, "o":1},
+	"SYY": {"eɪ":1, "aɪ":1, "ɔɪ":1, "ɪə":1, "eə":1, "ʊə":1, "əʊ":1, "aʊ":1, "o":1, "ʊə":1},
 	// 轻辅音
 	"QFY": {"p":1, "t":1, "k":1, "f":1, "θ":1, "s":1, "ʃ":1, "h":1, "ts":1, "tʃ":1, "tr":1, "tʃ":1},
 	// 浊辅音
@@ -97,13 +97,14 @@ var divide = exports.divide = function (pronounce) {
 	var startPos = 0;
 	var i = 0;
 	var lastFlag = true;
+	console.log("pronounce in divide: " + pronounce);
 	while (i < pronounce.length) {
 	// for (var i = 0; i < pronounce.length; i++) {
 		debugger;
 		var divideFlag = false;
 		var step = 0;
 		console.log("here")
-		console.log(i)
+		console.log("current index: " + i)
 		console.log(pronounce.substring(i, i + 1));
 		console.log(isZD(pronounce.substring(i, i + 1)))
 		if (isZD(pronounce.substring(i, i + 1))) {
@@ -124,6 +125,7 @@ var divide = exports.divide = function (pronounce) {
 				step = 1;
 			}
 		} catch (err) {
+			console.log("lhj catch error");
 			divideFlag = canDivided(pronounce.substring(i, i + 1));
 			step = 1;
 		}
