@@ -20,4 +20,5 @@ kk音标
 4.音标不存在，抛异常退出
 
 badcase:
-jewelry
+[X] jewelry
+[ ] flower

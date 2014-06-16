@@ -19,18 +19,18 @@
     	<input type="text" name="word" id="word" maxlength="100" style="width:484px;">
     	<input type="submit" value="search" id="search">
 	</div>
-	<div id="pronounce">
+	<div>
 		<h2 id="wordText">business</h2>
 	</div>
 	<div class="blue">
-		<p><span><b lang="EN-US" xml:lang="EN-US">[ˈbɪznɪs]</b></span></p>	
-		<p><strong>n.</strong><span>商业，交易；生意；事务，业务；职业，行业</span></p>
+		<p><span><b lang="EN-US" xml:lang="EN-US" id="pronounce">[ˈbɪznɪs]</b></span></p>	
+		<p><span id="translation">商业，交易；生意；事务，业务；职业，行业</span></p>
 	</div>
 	<div class="top20 gray">
-		<p><span><b lang="EN-US" xml:lang="EN-US">bɪznɪs</b></span></p>
+		<p><span><b lang="EN-US" xml:lang="EN-US" id="dividedPronounce">ˈbɪ-z-nɪ-s</b></span></p>
 	</div>
-	<div id="wrong" class="top20 red">
-		<p>This is not a word</p>
+	<div id="wrongDiv" class="top20 red hide">
+		<p>This is hide div</p>
 	</div>
 	<script type="text/javascript">
 	$(document).ready(function(){
@@ -50,11 +50,23 @@
 	                console.log(data)
 	                console.log(typeof(data))
 	                var obj = JSON.parse(data);
-	                console.log(obj["haha"]);
+	                if ("error" in obj) {
+	                	$("#wrongDiv").removeClass("hide");
+	                	$(".blue").addClass("hide");
+	                	$(".gray").addClass("hide");
+	                	$("#wrongDiv > p").text(obj["error"]);
+	                } else {
+	                	$("#wrongDiv").addClass("hide");
+	                	$(".blue").removeClass("hide");
+	                	$(".gray").removeClass("hide");
+	                	$("#pronounce").text(obj["pronounce"]);
+	                	$("#translation").html(obj["translation"]);
+	                	$("#dividedPronounce").html(obj["dividedPronounce"]);
+	            	}
 	            },
 	            error: function(xmlHTTPRequest, status, error){
 	                console.log(status);
-	                alert('cuowu!');
+	                alert('ajax error!');
 	            }
         	});
 		});
