@@ -3,10 +3,15 @@ var divide = require('./divide1')
 
 exports.getAndDivide = function(req, res) {
     var options = {
-        host: 'dict.youdao.com',
+        host: 'www.iciba.com',
         port: 80,
-        path: '/search?q=' + req.params.word
+        path: '/' + req.params.word
     };
+
+    var tran_html_start = '<div class="group_pos">'
+    var tran_html_end = '</div>'
+    var pron_html_start = '<strong lang="EN-US" xml:lang="EN-US">'
+    var pron_html_end = '</strong>'
 
     http.get(options, function(httpres) {
         // console.log("Got response: " + httpres.statusCode, httpres.headers);
@@ -27,18 +32,18 @@ exports.getAndDivide = function(req, res) {
             // var utf8_buffer = gbk_to_utf8_iconv.convert(buffer);
             // console.log(buffer.toString());
             var htmlText = buffer.toString();
-            var start = htmlText.indexOf('<div class="trans-container">');
-            var end = htmlText.indexOf('</div>', start);
-            var translation = htmlText.substring(start + '<div class="trans-container">'.length, end);
-            console.log(translation);
+            var start = htmlText.indexOf(tran_html_start);
+            var end = htmlText.indexOf(tran_html_end, start);
+            var translation = htmlText.substring(start + tran_html_start.length, end);
+            console.log("translation: " + translation);
 
-            var pstart = htmlText.indexOf('<span class="phonetic">');
-            pstart = htmlText.indexOf('<span class="phonetic">', pstart + '<span class="phonetic">'.length);
-            var pend = htmlText.indexOf('</span>', pstart);
+            var pstart = htmlText.indexOf(pron_html_start);
+            pstart = htmlText.indexOf(pron_html_start, pstart + pron_html_start.length);
+            var pend = htmlText.indexOf(pron_html_end, pstart);
        
-            var pronounce = htmlText.substring(pstart + '<span class="phonetic">'.length, pend)
+            var pronounce = htmlText.substring(pstart + pron_html_start.length, pend)
             console.log("pronounce: " + pronounce);
-            parts = divide.divide(pronounce.substring(1, pronounce.length - 1 ))
+            parts = divide.divide(pronounce)
             console.log(parts);
             var dividedPronounce = parts.join("-");
             res.end(JSON.stringify({"translation": translation, "pronounce": pronounce, "dividedPronounce": dividedPronounce}));
