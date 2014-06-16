@@ -1,6 +1,8 @@
 ﻿http://www.howmanysyllables.com/words/business
 
 国际英标
+http://blog.sina.com.cn/s/blog_641b343d0100kqoe.html
+http://www.uiowa.edu/~acadtech/phonetics/#
 
 
 1，printf的变长，编译器实现
